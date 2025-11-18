@@ -7,13 +7,14 @@ import type { ProcessedTextResult } from './types';
 import { ThemeToggle } from './components/ThemeToggle';
 import { AboutPage } from './components/AboutPage';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { BlogPage } from './components/BlogPage';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ProcessedTextResult | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [page, setPage] = useState<'main' | 'about' | 'privacy'>('main');
+  const [page, setPage] = useState<'main' | 'about' | 'privacy' | 'blog'>('main');
   
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined' && localStorage.getItem('theme')) {
@@ -39,7 +40,7 @@ const App: React.FC = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   }, []);
 
-  const navigateTo = (p: 'main' | 'about' | 'privacy') => {
+  const navigateTo = (p: 'main' | 'about' | 'privacy' | 'blog') => {
     setPage(p);
     window.scrollTo(0, 0); // Scroll to top on page change
   };
@@ -80,6 +81,8 @@ const App: React.FC = () => {
         return <AboutPage />;
       case 'privacy':
         return <PrivacyPolicyPage />;
+      case 'blog':
+        return <BlogPage />;
       case 'main':
       default:
         return (
@@ -143,6 +146,8 @@ const App: React.FC = () => {
             <button onClick={() => navigateTo('main')} className="hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">Home</button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
             <button onClick={() => navigateTo('about')} className="hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">About Us</button>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <button onClick={() => navigateTo('blog')} className="hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">Blog</button>
             <span className="text-gray-300 dark:text-gray-600">|</span>
             <button onClick={() => navigateTo('privacy')} className="hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">Privacy Policy</button>
           </div>

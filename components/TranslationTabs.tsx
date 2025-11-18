@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import type { Translations } from '../types';
 import { LanguageMap } from '../types';
-import { CopyIcon, CheckIcon } from './Icons';
+import { CopyIcon, CheckIcon, CopyAllIcon } from './Icons';
 
 interface TranslationTabsProps {
   translations: Translations;
@@ -12,37 +12,73 @@ type LanguageKey = keyof Translations;
 export const TranslationTabs: React.FC<TranslationTabsProps> = ({ translations }) => {
   const [activeTab, setActiveTab] = useState<LanguageKey>('English');
   const [copied, setCopied] = useState(false);
+  const [copiedAll, setCopiedAll] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     const textToCopy = translations[activeTab];
     if (!textToCopy) return;
     navigator.clipboard.writeText(textToCopy).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
-  };
+  }, [activeTab, translations]);
+
+  const handleCopyAll = useCallback(() => {
+    const allTranslationsText = (Object.keys(LanguageMap) as LanguageKey[])
+      .filter(lang => translations[lang]) // Only include non-empty translations
+      .map(lang => `[${LanguageMap[lang].toUpperCase()}]\n${translations[lang]}`)
+      .join('\n\n');
+    
+    if (!allTranslationsText) return;
+
+    navigator.clipboard.writeText(allTranslationsText).then(() => {
+      setCopiedAll(true);
+      setTimeout(() => setCopiedAll(false), 2000);
+    });
+  }, [translations]);
+
+  const noTranslationsAvailable = Object.values(translations).every(t => !t);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
         <div className="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
             <h3 className="text-md font-semibold text-gray-700 dark:text-gray-200">Translations</h3>
-            <button
-              onClick={handleCopy}
-              disabled={!translations[activeTab]}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-white rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-gray-600 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-500"
-            >
-              {copied ? (
-                <>
-                  <CheckIcon className="w-3.5 h-3.5 text-green-500 dark:text-green-400" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <CopyIcon className="w-3.5 h-3.5" />
-                  <span>Copy</span>
-                </>
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleCopyAll}
+                disabled={noTranslationsAvailable}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-white rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-gray-600 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-500"
+              >
+                {copiedAll ? (
+                  <>
+                    <CheckIcon className="w-3.5 h-3.5 text-green-500 dark:text-green-400" />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <CopyAllIcon className="w-3.5 h-3.5" />
+                    <span>Copy All</span>
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleCopy}
+                disabled={!translations[activeTab]}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-white rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-gray-600 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-500"
+              >
+                {copied ? (
+                  <>
+                    <CheckIcon className="w-3.5 h-3.5 text-green-500 dark:text-green-400" />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <CopyIcon className="w-3.5 h-3.5" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
         </div>
         <div className="border-b border-gray-200 dark:border-gray-700 px-4">
             <nav className="-mb-px flex space-x-6" aria-label="Tabs">

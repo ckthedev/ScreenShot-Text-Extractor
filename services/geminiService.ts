@@ -2,11 +2,11 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { ProcessedTextResult } from '../types';
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 const fileToGenerativePart = async (file: File) => {
   if (file.size > MAX_FILE_SIZE) {
-    throw new Error('File size exceeds 5 MB limit.');
+    throw new Error('File size exceeds 10 MB limit.');
   }
   const base64EncodedDataPromise = new Promise<string>((resolve) => {
     const reader = new FileReader();
