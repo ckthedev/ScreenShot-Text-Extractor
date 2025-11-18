@@ -1,12 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Screenshot Text Extractor</title>
+    <title>Screenshot Text Extractor | AI-Powered OCR & Processing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%234f46e5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M22 3H10C8.89543 3 8 3.89543 8 5V27C8 28.1046 8.89543 29 10 29H22C23.1046 29 24 28.1046 24 27V5C24 3.89543 23.1046 3 22 3Z'/%3e%3cpath d='M12 9H20'/%3e%3cpath d='M12 13H20'/%3e%3cpath d='M12 17H16'/%3e%3c/svg%3e" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%234f46e5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M22 3H10C8.89543 3 8 3.89543 8 5V27C8 28.1046 8.89543 29 10 29H22C23.1046 29 24 28.1046 24 27V5C24 3.89543 23.1046 3 22 3Z'/%3e%3cpath d='M12 9H20'/%3e%3cpath d='M12 13H20'/%3e%3cpath d='M12 17H16'/%3e%3c/svg%3e" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="An AI-powered tool to extract, correct, summarize, and translate text from any screenshot. Supports multiple languages and provides easy copy/download options." />
+    <meta name="keywords" content="ocr, text extractor, screenshot to text, image to text, grammar correction, summarizer, translator, ai tool, gemini ai, text processing" />
+    <meta name="author" content="AI Studio" />
+    <meta name="robots" content="index, follow" />
+    <!-- TODO: Add your canonical URL here -->
+    <!-- <link rel="canonical" href="https://your-website-url.com/" /> -->
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Screenshot Text Extractor | AI-Powered OCR & Processing" />
+    <meta property="og:description" content="Instantly extract, correct, summarize, and translate text from any screenshot with this AI-powered tool." />
+    <!-- TODO: Add your website URL and a preview image (1200x630px) -->
+    <!-- <meta property="og:url" content="https://your-website-url.com/" /> -->
+    <!-- <meta property="og:image" content="https://your-website-url.com/og-image.png" /> -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Screenshot Text Extractor | AI-Powered OCR & Processing" />
+    <meta property="twitter:description" content="Instantly extract, correct, summarize, and translate text from any screenshot with this AI-powered tool." />
+    <!-- TODO: Add your website URL and a preview image (1200x630px) -->
+    <!-- <meta property="twitter:url" content="https://your-website-url.com/" /> -->
+    <!-- <meta property="twitter:image" content="https://your-website-url.com/og-image.png" /> -->
+
+    <!-- Google AdSense -->
+    <!-- TODO: Replace with your Google AdSense Publisher ID -->
+    <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+         crossorigin="anonymous"></script> -->
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind to use class-based dark mode
+      tailwind.config = {
+        darkMode: 'class',
+      }
+      // Set dark mode class before page load to prevent flash
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
     <style>
       body {
         font-family: 'Inter', sans-serif;
@@ -24,7 +69,7 @@
 }
 </script>
 </head>
-  <body class="bg-gray-50 antialiased">
+  <body class="antialiased bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

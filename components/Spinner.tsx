@@ -1,10 +1,9 @@
-
 import React from 'react';
 
 export const Spinner: React.FC = () => {
   return (
     <svg
-      className="animate-spin h-8 w-8 text-indigo-600"
+      className="animate-spin h-8 w-8 text-indigo-600 dark:text-indigo-400"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

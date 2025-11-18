@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { Translations } from '../types';
 import { LanguageMap } from '../types';
@@ -24,17 +23,17 @@ export const TranslationTabs: React.FC<TranslationTabsProps> = ({ translations }
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <div className="p-4 flex justify-between items-center border-b border-gray-200 bg-gray-50">
-            <h3 className="text-md font-semibold text-gray-700">Translations</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+        <div className="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+            <h3 className="text-md font-semibold text-gray-700 dark:text-gray-200">Translations</h3>
             <button
               onClick={handleCopy}
               disabled={!translations[activeTab]}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-white rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-white rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-gray-600 dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-500"
             >
               {copied ? (
                 <>
-                  <CheckIcon className="w-3.5 h-3.5 text-green-500" />
+                  <CheckIcon className="w-3.5 h-3.5 text-green-500 dark:text-green-400" />
                   <span>Copied!</span>
                 </>
               ) : (
@@ -45,7 +44,7 @@ export const TranslationTabs: React.FC<TranslationTabsProps> = ({ translations }
               )}
             </button>
         </div>
-        <div className="border-b border-gray-200 px-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 px-4">
             <nav className="-mb-px flex space-x-6" aria-label="Tabs">
             {(Object.keys(LanguageMap) as LanguageKey[]).map((lang) => (
                 <button
@@ -53,8 +52,8 @@ export const TranslationTabs: React.FC<TranslationTabsProps> = ({ translations }
                 onClick={() => setActiveTab(lang)}
                 className={`whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors
                     ${activeTab === lang
-                        ? 'border-indigo-500 text-indigo-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        ? 'border-indigo-500 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:border-gray-600'
                     }`}
                 >
                 {LanguageMap[lang]}
@@ -63,8 +62,8 @@ export const TranslationTabs: React.FC<TranslationTabsProps> = ({ translations }
             </nav>
         </div>
         <div className="p-4">
-            <p className="text-gray-800 whitespace-pre-wrap text-sm leading-relaxed">
-            {translations[activeTab] || <span className="text-gray-400">Not available.</span>}
+            <p className="text-gray-800 dark:text-gray-300 whitespace-pre-wrap text-sm leading-relaxed">
+            {translations[activeTab] || <span className="text-gray-400 dark:text-gray-500">Not available.</span>}
             </p>
         </div>
     </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import type { ProcessedTextResult, Translations } from '../types';
 import { LanguageMap } from '../types';
@@ -42,18 +41,18 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, onReset,
   return (
     <div className="animate-fade-in space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h2 className="text-2xl font-bold text-gray-800">Processing Complete</h2>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Processing Complete</h2>
         <div className="flex items-center gap-2">
            <button
             onClick={handleDownload}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors text-sm font-medium"
           >
             <DownloadIcon className="w-4 h-4" />
             Download (.txt)
           </button>
           <button
             onClick={onReset}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 transition-colors text-sm font-medium"
           >
             <RedoIcon className="w-4 h-4" />
             Process Another
@@ -64,8 +63,8 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result, onReset,
             <div className="md:col-span-1">
                  {imagePreview && (
                     <div className="sticky top-8">
-                        <img src={imagePreview} alt="Processed screenshot" className="w-full h-auto object-contain rounded-xl shadow-lg border border-gray-200"/>
-                        <p className="text-center text-xs text-gray-500 mt-2">Original Image</p>
+                        <img src={imagePreview} alt="Processed screenshot" className="w-full h-auto object-contain rounded-xl shadow-lg border border-gray-200 dark:border-gray-700"/>
+                        <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">Original Image</p>
                     </div>
                  )}
             </div>

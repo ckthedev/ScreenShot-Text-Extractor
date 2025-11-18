@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef } from 'react';
 import { UploadIcon } from './Icons';
 
@@ -77,7 +76,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) =
         onDrop={handleDrop}
         onClick={onButtonClick}
         className={`w-full p-10 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300
-          ${isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 hover:border-indigo-400 hover:bg-gray-50'}`}
+          ${isDragging 
+            ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' 
+            : 'border-gray-300 hover:border-indigo-400 hover:bg-gray-50 dark:border-gray-600 dark:hover:border-indigo-500 dark:hover:bg-gray-700/50'}`}
       >
         <input
           ref={fileInputRef}
@@ -88,15 +89,15 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) =
         />
         <div className="flex flex-col items-center text-center space-y-4">
           <UploadIcon className="w-12 h-12 text-gray-400" />
-          <p className="text-lg font-medium text-gray-700">
-            <span className="text-indigo-600">Click to upload</span> or drag and drop
+          <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
+            <span className="text-indigo-600 dark:text-indigo-400">Click to upload</span> or drag and drop
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Supports: JPG, PNG, WEBP (Max 5MB)
           </p>
         </div>
       </div>
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-sm text-red-600 dark:text-red-400">{error}</p>}
     </div>
   );
 };
