@@ -3,7 +3,7 @@ import React from 'react';
 export const AboutPage: React.FC = () => {
   return (
     <div className="animate-fade-in bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-10 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-      <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-800 prose-a:text-indigo-600 hover:prose-a:text-indigo-500 dark:prose-headings:text-gray-100 dark:prose-a:text-indigo-400">
+      <div className="prose prose-lg max-w-none text-gray-700 dark:prose-invert prose-headings:font-bold prose-headings:text-gray-800 prose-a:text-indigo-600 hover:prose-a:text-indigo-500 dark:prose-headings:text-gray-100 dark:prose-a:text-indigo-400">
         <h1 className="text-4xl font-bold mb-6">About Us</h1>
         
         <h2 className="text-2xl font-semibold mt-8 mb-4">Our Mission</h2>
