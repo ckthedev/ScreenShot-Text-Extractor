@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { ImageUploader } from './components/ImageUploader';
 import { ResultsDisplay } from './components/ResultsDisplay';
@@ -55,10 +56,11 @@ const App: React.FC = () => {
     try {
       const processedResult = await extractTextAndProcess(file);
       setResult(processedResult);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      // Use the specific error message from the service if available
       setError(
-        'Failed to process the image. Please try again with a clearer image.'
+        err.message || 'Failed to process the image. Please try again with a clearer image.'
       );
     } finally {
       setIsLoading(false);
