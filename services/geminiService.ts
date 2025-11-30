@@ -49,16 +49,12 @@ const handleApiError = (error: any) => {
 };
 
 export const extractTextAndProcess = async (file: File): Promise<ProcessedTextResult> => {
-  // Check if API_KEY is available. Safe check for 'process' to avoid reference errors in some environments.
-  const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : undefined;
+  // Retrieve API Key safely. 
+  // Note: In production, this should be injected by the build system.
+  const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
 
-  if (!apiKey) {
-    throw new Error(
-      "API_KEY is missing. If running locally, please create a .env file with 'API_KEY=your_key' and ensure your bundler (like Vite or Webpack) is configured to expose it."
-    );
-  }
-
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Initialize with the key (or empty string if missing, which will cause an API error later)
+  const ai = new GoogleGenAI({ apiKey: apiKey || '' });
 
   // Step 1: Extract text from the image
   let ocrResponse;
@@ -75,7 +71,7 @@ export const extractTextAndProcess = async (file: File): Promise<ProcessedTextRe
     });
   } catch (error) {
     handleApiError(error);
-    throw error; // handleApiError throws, but typescript needs this for control flow if return type was different
+    throw error; 
   }
 
   const extractedText = ocrResponse?.text?.trim();
