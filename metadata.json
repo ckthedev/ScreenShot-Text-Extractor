@@ -1,7 +1,5 @@
 {
   "name": "Screenshot Text Extractor",
   "description": "An AI-powered tool to extract, correct, summarize, and translate text from any screenshot. Supports multiple languages and provides easy copy/download options for the processed text.",
-  "requestFramePermissions": [
-    "camera"
-  ]
+  "requestFramePermissions": []
 }
