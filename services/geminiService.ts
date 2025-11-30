@@ -49,8 +49,13 @@ const handleApiError = (error: any) => {
 };
 
 export const extractTextAndProcess = async (file: File): Promise<ProcessedTextResult> => {
-  if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable is not set.");
+  // Check if API_KEY is available. Safe check for 'process' to avoid reference errors in some environments.
+  const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : undefined;
+
+  if (!apiKey) {
+    throw new Error(
+      "API_KEY is missing. If running locally, please create a .env file with 'API_KEY=your_key' and ensure your bundler (like Vite or Webpack) is configured to expose it."
+    );
   }
 
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
